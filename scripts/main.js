@@ -69,7 +69,7 @@ map.on('load', () => {
   gStations = svg.append('g').attr('class', 'stations');
 
   // Load Citi Bike sample CSV
-  d3.csv('202301-citibike-50k.csv', d3.autoType).then(data => {
+  d3.csv('data/202301-citibike-50k.csv', d3.autoType).then(data => {
     trips = data;
 
     // Preprocess: parse started_at hour and build station map from trips
