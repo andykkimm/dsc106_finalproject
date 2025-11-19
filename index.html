@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="scripts/main.js"></script>
     <script src="scripts/chart-hourly.js"></script>
-
+    <script src="scripts/chart-static-flow-map.js"></script>
 
 
 </head>
@@ -69,6 +69,17 @@
             </p>
         
             <div id="hourly-chart"></div>
+        </section>
+        <section class="viz-section">
+            <h2>Station Flow Map (Static Scatter Plot)</h2>
+            <p class="description">
+                This static map visualizes how busy each Citi Bike station is. Circle size reflects total traffic 
+                (departures + arrivals), and color indicates whether a station serves more as a departure hub (blue) 
+                or arrival hub (red). This complements the time-of-day chart by showing where physical demand clusters 
+                occur across NYC.
+            </p>
+        
+            <div id="static-flow-map"></div>
         </section>
     </div>
 </body>
