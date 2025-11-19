@@ -14,7 +14,6 @@
     <script src="scripts/chart-hourly.js"></script>
     <script src="scripts/chart-static-flow-map.js"></script>
 
-
 </head>
 
 <body>
@@ -81,7 +80,29 @@
         
             <div id="static-flow-map"></div>
         </section>
+
+        <section class="viz-section">
+        <h2>Trip Duration Distribution</h2>
+        <p class="description">
+            This histogram compares Citi Bike trip durations between members and casual riders.
+            Use the sliders to adjust the maximum duration included and the bin size.
+        </p>
+
+        <div id="duration-controls">
+            <label><strong>Max Duration (min):</strong> <span id="max-value">60</span></label>
+            <input type="range" id="max-duration" min="10" max="180" value="60" step="5">
+
+            <label><strong>Bin Size (min):</strong> <span id="bin-value">5</span></label>
+            <input type="range" id="bin-size" min="1" max="30" value="5" step="1">
+        </div>
+
+        <div id="duration-chart"></div>
+        </section>
     </div>
+    <script type="module">
+        import { drawDurationChart } from "./scripts/chart-duration.js";
+        drawDurationChart();
+    </script>
 </body>
 
 </html>
