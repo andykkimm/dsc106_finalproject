@@ -152,3 +152,82 @@ header h1 {
     stroke: #f0f0f0;
     stroke-width: 0.5px;
 }
+
+/* OD Flow layout */
+
+#od-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+#od-bar-container,
+#od-map-container {
+    flex: 1 1 0;
+    min-width: 0;
+    background: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.od-subtitle {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+/* SVG sizes */
+
+#od-bar {
+    width: 100%;
+    height: 320px;
+}
+
+#od-map {
+    width: 100%;
+    height: 320px;
+}
+
+/* Bar chart */
+
+.od-bar-axis text {
+    font-size: 10px;
+    fill: #555;
+}
+
+.od-bar-axis path,
+.od-bar-axis line {
+    stroke: #ddd;
+}
+
+.od-bar-rect {
+    fill: #2563eb;
+    cursor: pointer;
+}
+
+.od-bar-rect:hover {
+    fill: #1d4ed8;
+}
+
+/* Map */
+
+.od-map-station {
+    fill: #111827;
+    stroke: white;
+    stroke-width: 0.5px;
+}
+
+.od-map-flow {
+    fill: none;
+    stroke: rgba(37, 99, 235, 0.4);
+    cursor: pointer;
+}
+
+.od-map-flow.highlight,
+.od-bar-rect.highlight {
+    stroke: #f97316;
+    fill: #f97316;
+    stroke-width: 2;
+}

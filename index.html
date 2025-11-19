@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/main.js" defer></script>
     <script src="scripts/heatmap.js" defer></script>
+    <script src="scripts/odflow.js" defer></script>
+
 
 </head>
 
@@ -59,6 +61,25 @@
             <svg id="heatmap"></svg>
         </div>
         </section>
+    <section class="viz-section">
+    <h2>Origin–Destination Flows</h2>
+    <p class="description">
+        These charts show the top 10 most common station-to-station trips in our January 2023 Citi Bike sample.
+        The bar chart ranks the busiest origin–destination pairs, while the map on the right draws each connection as
+        a line between stations. Thicker lines correspond to more trips.
+    </p>
+
+    <div id="od-layout">
+        <div id="od-bar-container">
+        <h3 class="od-subtitle">Top 10 Station → Station Routes</h3>
+        <svg id="od-bar"></svg>
+        </div>
+        <div id="od-map-container">
+        <h3 class="od-subtitle">Map of Top 10 Flows</h3>
+        <svg id="od-map"></svg>
+        </div>
+    </div>
+    </section>
 
     </div>
 </body>
