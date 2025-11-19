@@ -160,7 +160,7 @@ export async function drawDurationChart() {
 
         // Legend
         const legend = svg.append('g')
-            .attr('transform', `translate(${width + 10}, 50)`);
+            .attr('transform', `translate(${width - 30}, 50)`);
 
         legend.append('rect')
             .attr('width', 20)
