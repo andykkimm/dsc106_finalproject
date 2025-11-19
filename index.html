@@ -108,18 +108,24 @@
                 <strong>Red/Orange Areas:</strong> Neighborhoods with <strong>high car-free populations</strong>.
             </p>
 
-            <div id="equity-map-container"
-                style="background:white; padding:1rem; border-radius:8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <div id="equity-map-container">
 
                 <div id="equity-controls">
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="toggle-stations" checked>
-                        <span class="slider"></span>
-                    </label>
-                    <span class="toggle-label">Show Citi Bike Stations</span>
+                    <div class="control-group">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-stations" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="toggle-label">Show Citi Bike Stations</span>
+                    </div>
+
+                    <button id="recenter-btn" class="btn-pill">
+                        ⟲ Recenter Map
+                    </button>
                 </div>
 
                 <div id="equity-map"></div>
+
             </div>
         </section>
     </div>

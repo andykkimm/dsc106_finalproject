@@ -75,7 +75,8 @@ header h1 {
     position: absolute;
     top: 0;
     left: 0;
-    pointer-events: none; /* let mouse events pass through to Mapbox except for tooltips */
+    pointer-events: none;
+    /* let mouse events pass through to Mapbox except for tooltips */
 }
 
 /* Station circles */
@@ -85,8 +86,9 @@ header h1 {
     stroke-width: 0.5px;
     cursor: pointer;
     opacity: 0.85;
-    pointer-events: auto; /* needed so we can hover for tooltip */
-    filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.15));
+    pointer-events: auto;
+    /* needed so we can hover for tooltip */
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.15));
 }
 
 .station-circle:hover {
@@ -232,16 +234,65 @@ header h1 {
     stroke-width: 2;
 }
 
+#equity-map-container {
+    background: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-top: 1rem;
+    overflow: hidden; /* <--- ADD THIS: Clips the content to the rounded corners */
+}
 
-/* --- Modern Toggle Switch --- */
 
 #equity-controls {
     display: flex;
     align-items: center;
-    gap: 12px; /* Space between switch and text */
+    gap: 20px;
+    /* Places button next to toggle with breathing room */
+    justify-content: flex-start;
+    /* Aligns everything to the left */
     margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- The "Pill" Button --- */
+.btn-pill {
+    background-color: white;
+    border: 1px solid #ccc;
+    /* High border-radius makes it a "pill" shape, matching the toggle */
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover State: Matches the "Active" Blue of the Toggle */
+.btn-pill:hover {
+    border-color: #007bff;
+    color: #007bff;
+    background-color: #f0f8ff;
+    /* Very light blue tint */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.15);
+}
+
+.btn-pill:active {
+    transform: translateY(0);
+    background-color: #e6f0ff;
 }
 
 /* The Container */
@@ -250,7 +301,8 @@ header h1 {
     display: inline-block;
     width: 50px;
     height: 26px;
-    margin-bottom: 0; /* Override default label margins */
+    margin-bottom: 0;
+    /* Override default label margins */
 }
 
 /* Hide default HTML checkbox */
@@ -268,9 +320,11 @@ header h1 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc; /* Default Gray */
+    background-color: #ccc;
+    /* Default Gray */
     transition: .4s;
-    border-radius: 34px; /* Rounded edges */
+    border-radius: 34px;
+    /* Rounded edges */
 }
 
 /* The Circle (Knob) */
@@ -284,16 +338,18 @@ header h1 {
     background-color: white;
     transition: .4s;
     border-radius: 50%;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Subtle shadow for depth */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    /* Subtle shadow for depth */
 }
 
 /* Active State: Blue Background */
-input:checked + .slider {
-    background-color: #007bff; /* Matches your map bubbles */
+input:checked+.slider {
+    background-color: #007bff;
+    /* Matches your map bubbles */
 }
 
 /* Active State: Move Knob */
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(24px);
 }
 
