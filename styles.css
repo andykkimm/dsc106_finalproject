@@ -118,3 +118,15 @@ header h1 {
     font-size: 12px;
     fill: #444;
 }
+#hourly-chart svg {
+    display: block;
+    margin: 0 auto;
+}
+
+.viz-section {
+    margin-top: 2rem;
+    background: white;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
