@@ -11,6 +11,7 @@
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts/main.js" type="module"></script>
+
 </head>
 
 <body>
@@ -47,16 +48,17 @@
             </div>
         </section>
         <section class="viz-section">
-            <h2>Station Demand by Time of Day (Departures vs Arrivals)</h2>
-            <p class="description">
-                This static visualization compares the number of Citi Bike departures and arrivals by hour of day across New York City.
-                It reveals commuting patterns such as morning departures and evening arrivals.
-            </p>
-        
-            <div id="hourly-chart"></div>
+        <h2>Hourly Activity by Day of Week</h2>
+        <p class="description">
+            This heatmap shows how Citi Bike usage varies across hours of the day and days of the week.
+            Darker cells indicate more trips. Weekday rush hours stand out compared to quieter nights and weekends.
+        </p>
+
+        <div id="heatmap-container">
+            <svg id="heatmap"></svg>
+        </div>
         </section>
-        
-        <script src="scripts/chart-hourly.js"></script>
+
     </div>
 </body>
 

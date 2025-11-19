@@ -118,15 +118,37 @@ header h1 {
     font-size: 12px;
     fill: #444;
 }
-#hourly-chart svg {
-    display: block;
-    margin: 0 auto;
+
+/* Heatmap container */
+
+#heatmap-container {
+    background: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-top: 1rem;
 }
 
-.viz-section {
-    margin-top: 2rem;
-    background: white;
-    padding: 1rem 1.2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+#heatmap {
+    width: 100%;
+    height: 320px;
+}
+
+/* Axis text */
+
+.heatmap-axis text {
+    font-size: 10px;
+    fill: #555;
+}
+
+.heatmap-axis path,
+.heatmap-axis line {
+    stroke: #ddd;
+}
+
+/* Heatmap rects */
+
+.heatmap-cell {
+    stroke: #f0f0f0;
+    stroke-width: 0.5px;
 }
