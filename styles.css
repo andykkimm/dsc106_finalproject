@@ -1,0 +1,106 @@
+/* Layout and typography */
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 1.5rem;
+    background: #f7f7f7;
+}
+
+.content {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+header {
+    margin-bottom: 1rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.authors {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.subtitle {
+    margin: 0.25rem 0 0.75rem;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.viz-section .description {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.75rem;
+}
+
+/* Controls */
+
+#controls {
+    margin-bottom: 0.75rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+#controls select {
+    padding: 0.25rem 0.5rem;
+}
+
+/* Chart container */
+
+#chart-container {
+    background: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+svg#map {
+    width: 100%;
+    height: 650px;
+}
+
+/* Station circles */
+
+.station-circle {
+    stroke: white;
+    stroke-width: 0.5px;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.station-circle:hover {
+    stroke: black;
+    stroke-width: 1px;
+    opacity: 1;
+}
+
+/* Tooltip */
+
+.tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.4;
+    max-width: 240px;
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+    z-index: 10;
+}
+
+/* Legend text */
+
+.legend {
+    font-size: 12px;
+    fill: #444;
+}

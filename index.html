@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <script src="scripts/main.js"></script>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Project</title>
+
+    <!-- D3 libraries -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <!-- Your CSS + JS -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts/main.js" defer></script>
 </head>
 
 <body>
@@ -14,9 +19,35 @@
         <header>
             <h1>Final Project</h1>
             <p class="authors">Justin Lee, Andrew Kim, Angela Yuan, Victor Chen</p>
-            <p class="subtitle">Subtitle</p>
+            <p class="subtitle">Citi Bike Station Demand in NYC (January 2023 sample)</p>
         </header>
+
+        <!-- Controls + map container -->
+        <section class="viz-section">
+            <p class="description">
+                This interactive map shows how busy each Citi Bike station is. Circle size encodes the total
+                number of trips passing through a station, and color shows whether it is more of a departure
+                hub (blue) or an arrival hub (orange). Use the time-of-day filter to see how the pattern changes
+                across the day.
+            </p>
+
+            <div id="controls">
+                <label for="time-filter"><strong>Time of day:</strong></label>
+                <select id="time-filter">
+                    <option value="all">All day</option>
+                    <option value="morning">Morning (06:00–12:00)</option>
+                    <option value="afternoon">Afternoon (12:00–18:00)</option>
+                    <option value="evening">Evening (18:00–24:00)</option>
+                    <option value="night">Night (00:00–06:00)</option>
+                </select>
+            </div>
+
+            <div id="chart-container">
+                <svg id="map"></svg>
+            </div>
+
+            <div id="tooltip" class="tooltip"></div>
+        </section>
     </div>
 </body>
-
 </html>
