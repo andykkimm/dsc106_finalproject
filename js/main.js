@@ -60,96 +60,109 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', async () => {
-    const [stationsData, equityData, tractsGeoJSON, subwayGeoJSON] = await Promise.all([
-        d3.csv('data/202301-citibike-50k.csv'),
-        d3.csv('data/nyc_transit_equity.csv'),
-        d3.json('data/nyc_tracts.geojson'),
-        d3.json('data/nyc_subway.geojson')
-    ]);
+    try {
+        const [stationsData, equityData, tractsGeoJSON, subwayGeoJSON] = await Promise.all([
+            d3.csv('data/202301-citibike-50k.csv'),
+            d3.csv('data/nyc_transit_equity.csv'),
+            d3.json('data/nyc_tracts.geojson'),
+            d3.json('data/nyc_subway.geojson')
+        ]);
 
-    const stationMap = new Map();
-    stationsData.forEach(d => {
-        if (!d.start_lng || !d.start_lat) return;
-        const name = d.start_station_name;
-        if (!stationMap.has(name)) {
-            stationMap.set(name, {
-                name: name,
-                lat: +d.start_lat,
-                lng: +d.start_lng,
-                count: 0,
-                member: 0,
-                casual: 0
-            });
-        }
-        const station = stationMap.get(name);
-        station.count++;
-        if (d.member_casual === 'member') station.member++;
-        else station.casual++;
-    });
-
-    const stationsGeoJSON = {
-        type: 'FeatureCollection',
-        features: Array.from(stationMap.values()).map(s => ({
-            type: 'Feature',
-            geometry: { type: 'Point', coordinates: [s.lng, s.lat] },
-            properties: {
-                name: s.name,
-                count: s.count,
-                majority_type: (s.member >= s.casual) ? 'member' : 'casual'
+        const stationMap = new Map();
+        stationsData.forEach(d => {
+            if (!d.start_lng || !d.start_lat) return;
+            const name = d.start_station_name;
+            if (!stationMap.has(name)) {
+                stationMap.set(name, {
+                    name: name,
+                    lat: +d.start_lat,
+                    lng: +d.start_lng,
+                    count: 0,
+                    member: 0,
+                    casual: 0
+                });
             }
-        }))
-    };
-
-    const equityLookup = new Map();
-    equityData.forEach(row => {
-        equityLookup.set(String(row.GEOID), {
-            pct: +row.pct_no_vehicle,
-            households: +row.total_households
+            const station = stationMap.get(name);
+            station.count++;
+            if (d.member_casual === 'member') station.member++;
+            else station.casual++;
         });
-    });
 
-    const neighborhoodStats = new Map();
+        const stationsGeoJSON = {
+            type: 'FeatureCollection',
+            features: Array.from(stationMap.values()).map(s => ({
+                type: 'Feature',
+                geometry: { type: 'Point', coordinates: [s.lng, s.lat] },
+                properties: {
+                    name: s.name,
+                    count: s.count,
+                    majority_type: (s.member >= s.casual) ? 'member' : 'casual'
+                }
+            }))
+        };
 
-    tractsGeoJSON.features.forEach(feature => {
-        const geoid = feature.properties.geoid || feature.properties.GEOID;
-        const data = equityLookup.get(String(geoid));
+        const equityLookup = new Map();
+        equityData.forEach(row => {
+            equityLookup.set(String(row.GEOID), {
+                pct: +row.pct_no_vehicle,
+                households: +row.total_households
+            });
+        });
 
-        feature.properties.pct_car_free = data ? data.pct : 0;
-        feature.properties.total_households = data ? data.households : 0;
+        const neighborhoodStats = new Map();
 
-        const nta = feature.properties.ntaname;
-        if (nta) {
-            if (!neighborhoodStats.has(nta)) {
-                neighborhoodStats.set(nta, { households: 0, carFreeHouseholds: 0 });
+        tractsGeoJSON.features.forEach(feature => {
+            const geoid = feature.properties.geoid || feature.properties.GEOID;
+            const data = equityLookup.get(String(geoid));
+
+            feature.properties.pct_car_free = data ? data.pct : 0;
+            feature.properties.total_households = data ? data.households : 0;
+
+            const nta = feature.properties.ntaname;
+            if (nta) {
+                if (!neighborhoodStats.has(nta)) {
+                    neighborhoodStats.set(nta, { households: 0, carFreeHouseholds: 0 });
+                }
+                const stats = neighborhoodStats.get(nta);
+                const households = feature.properties.total_households;
+                const carFreePct = feature.properties.pct_car_free;
+
+                stats.households += households;
+                stats.carFreeHouseholds += (households * carFreePct);
             }
+        });
+
+        tractsGeoJSON.features.forEach(feature => {
+            const nta = feature.properties.ntaname;
             const stats = neighborhoodStats.get(nta);
-            const households = feature.properties.total_households;
-            const carFreePct = feature.properties.pct_car_free;
 
-            stats.households += households;
-            stats.carFreeHouseholds += (households * carFreePct);
+            if (stats && stats.households > 0) {
+                feature.properties.nta_total_households = stats.households;
+                feature.properties.nta_avg_car_free = stats.carFreeHouseholds / stats.households;
+            } else {
+                feature.properties.nta_total_households = 0;
+                feature.properties.nta_avg_car_free = 0;
+            }
+        });
+
+        addEquityLayer(map, tractsGeoJSON);
+        addSubwayLayer(map, subwayGeoJSON);
+        addGapLayer(map);
+        addStationLayer(map, stationsGeoJSON);
+
+        updateStoryUI(0);
+
+        const loader = document.getElementById('loader');
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
         }
-    });
-
-    tractsGeoJSON.features.forEach(feature => {
-        const nta = feature.properties.ntaname;
-        const stats = neighborhoodStats.get(nta);
-
-        if (stats && stats.households > 0) {
-            feature.properties.nta_total_households = stats.households;
-            feature.properties.nta_avg_car_free = stats.carFreeHouseholds / stats.households;
-        } else {
-            feature.properties.nta_total_households = 0;
-            feature.properties.nta_avg_car_free = 0;
-        }
-    });
-
-    addEquityLayer(map, tractsGeoJSON);
-    addSubwayLayer(map, subwayGeoJSON);
-    addGapLayer(map);
-    addStationLayer(map, stationsGeoJSON);
-
-    updateStoryUI(0);
+    } catch (error) {
+        console.error("Error loading data:", error);
+        alert("Failed to load map data. Please try refreshing.");
+    }
 });
 
 function updateStoryUI(index) {
