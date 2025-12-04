@@ -15,8 +15,10 @@ const STORY_STEPS = [
             "Over <strong>1,700 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations, " +
             "showing how the system is heavily concentrated in the commercial core.",
         btnText: "Next: The Hidden Layer →",
-        center: [-73.9, 40.74],
-        zoom: 10.5,
+        centerDesktop: [-73.9, 40.74],
+        centerMobile: [-73.96, 40.63],
+        zoomDesktop: 11,
+        zoomMobile: 9.8,
         pitch: 0,
         bearing: 0
     },
@@ -31,8 +33,10 @@ const STORY_STEPS = [
             "notice how bike station coverage drops off sharply in the outer boroughs, " +
             "leaving the subway to do all the heavy lifting alone.",
         btnText: "Next: Bridging the Gap →",
-        center: [-73.9, 40.74],
-        zoom: 10.95,
+        centerDesktop: [-73.9, 40.74],
+        centerMobile: [-73.96, 40.47],
+        zoomDesktop: 10,
+        zoomMobile: 9,
         pitch: 0,
         bearing: 0
     },
@@ -47,8 +51,10 @@ const STORY_STEPS = [
             "for Citi Bike to fill.",
 
         btnText: "Restart Story ↺",
-        center: [-73.9, 40.74],
-        zoom: 11.5,
+        centerDesktop: [-73.9, 40.74],
+        centerMobile: [-73.96, 40.5],
+        zoomDesktop: 10.5,
+        zoomMobile: 10,
         pitch: 45,
         bearing: 0
     }
@@ -198,8 +204,8 @@ function updateStoryUI(index) {
 
     updateMapLayers();
     map.flyTo({
-        center: step.center,
-        zoom: step.zoom,
+        center: getResponsiveCenter(step),
+        zoom: getResponsiveZoom(step),
         speed: 1.5,
         pitch: step.pitch || 0,
         bearing: step.bearing || 0
@@ -239,13 +245,29 @@ function updateMapLayers() {
     }
 }
 
+function getResponsiveZoom(step) {
+    if (window.innerWidth < 600) {
+        return step.zoomMobile;
+    } else {
+        return step.zoomDesktop;
+    }
+}
+
+function getResponsiveCenter(step) {
+    if (window.innerWidth < 600) {
+        return step.centerMobile;
+    } else {
+        return step.centerDesktop;
+    }
+}
+
 const recenterBtn = document.getElementById('recenter-btn');
 if (recenterBtn) {
     recenterBtn.addEventListener('click', () => {
         const step = STORY_STEPS[currentStepIndex];
         map.flyTo({
-            center: step.center,
-            zoom: step.zoom,
+            center: getResponsiveCenter(step),
+            zoom: getResponsiveZoom(step),
             pitch: step.pitch || 0,
             bearing: step.bearing || 0,
             speed: 1.5
