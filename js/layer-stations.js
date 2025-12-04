@@ -43,7 +43,7 @@ export function addStationLayer(map, data) {
             .setHTML(`
                 <strong>${props.name}</strong><br>
                 Trips: ${props.count}<br>
-                Type: ${props.majority_type}
+                Type: ${props.majority_type.charAt(0).toUpperCase() + props.majority_type.slice(1).toLowerCase()}
             `)
             .addTo(map);
     });
