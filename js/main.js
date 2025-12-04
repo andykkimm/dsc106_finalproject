@@ -15,8 +15,8 @@ const STORY_STEPS = [
             "Over <strong>1,700 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations, " +
             "showing how the system is heavily concentrated in the commercial core.",
         btnText: "Next: The Hidden Layer →",
-        center: [-73.9, 40.7],
-        zoom: 10.65,
+        center: [-73.9, 40.74],
+        zoom: 10.5,
         pitch: 0,
         bearing: 0
     },
@@ -31,8 +31,8 @@ const STORY_STEPS = [
             "notice how bike station coverage drops off sharply in the outer boroughs, " +
             "leaving the subway to do all the heavy lifting alone.",
         btnText: "Next: Bridging the Gap →",
-        center: [-73.9, 40.70],
-        zoom: 10.65,
+        center: [-73.9, 40.74],
+        zoom: 10.95,
         pitch: 0,
         bearing: 0
     },
@@ -47,8 +47,8 @@ const STORY_STEPS = [
             "for Citi Bike to fill.",
 
         btnText: "Restart Story ↺",
-        center: [-73.9, 40.7],
-        zoom: 10.65,
+        center: [-73.9, 40.74],
+        zoom: 11.5,
         pitch: 45,
         bearing: 0
     }
@@ -200,7 +200,7 @@ function updateStoryUI(index) {
     map.flyTo({
         center: step.center,
         zoom: step.zoom,
-        speed: 1.2,
+        speed: 1.5,
         pitch: step.pitch || 0,
         bearing: step.bearing || 0
     });
