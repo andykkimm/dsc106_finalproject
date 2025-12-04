@@ -11,13 +11,13 @@ const STORY_STEPS = [
         title: "The Pulse of the City",
         content: "New York City has one of the largest bike-share systems in the world. " +
             "Every day, millions of trips trace the rhythms of how people move.<br><br>" +
-            "Over <strong>1,700 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations.<br><br>" +
-            "<div style='margin-top: 10px;'>" +
-            "<span class='legend-item'><span class='legend-dot dot-member'></span> Member</span>" +
-            "<span class='legend-item'><span class='legend-dot dot-casual'></span> Casual</span>" +
-            "</div>",
+            "Over <strong>1,700 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations, " +
+            "showing how the system is heavily concentrated in the commercial core.",
         btnText: "Next: The Hidden Layer →",
-        center: [-73.98, 40.75], zoom: 11
+        center: [-73.9, 40.7],
+        zoom: 10.5,
+        pitch: 0,
+        bearing: 0
     },
     {
         step: 2,
@@ -30,7 +30,10 @@ const STORY_STEPS = [
             "notice how bike station coverage drops off sharply in the outer boroughs, " +
             "leaving the subway to do all the heavy lifting alone.",
         btnText: "Next: Bridging the Gap →",
-        center: [-73.94, 40.70], zoom: 10
+        center: [-73.9, 40.70],
+        zoom: 10.5,
+        pitch: 0,
+        bearing: 0
     },
     {
         step: 3,
@@ -43,7 +46,10 @@ const STORY_STEPS = [
             "for Citi Bike to fill.",
 
         btnText: "Restart Story ↺",
-        center: [-73.90, 40.65], zoom: 10.5
+        center: [-73.9, 40.7],
+        zoom: 10.5,
+        pitch: 45,
+        bearing: 0
     }
 ];
 
@@ -96,7 +102,7 @@ map.on('load', async () => {
                 properties: {
                     name: s.name,
                     count: s.count,
-                    majority_type: (s.member >= s.casual) ? 'member' : 'casual'
+                    member: s.member,
                 }
             }))
         };
@@ -189,7 +195,13 @@ function updateStoryUI(index) {
     }
 
     updateMapLayers();
-    map.flyTo({ center: step.center, zoom: step.zoom, speed: 1.2 });
+    map.flyTo({
+        center: step.center,
+        zoom: step.zoom,
+        speed: 1.2,
+        pitch: step.pitch || 0,
+        bearing: step.bearing || 0
+    });
 }
 
 function updateMapLayers() {
@@ -226,7 +238,13 @@ const recenterBtn = document.getElementById('recenter-btn');
 if (recenterBtn) {
     recenterBtn.addEventListener('click', () => {
         const step = STORY_STEPS[currentStepIndex];
-        map.flyTo({ center: step.center, zoom: step.zoom, speed: 1.5 });
+        map.flyTo({
+            center: step.center,
+            zoom: step.zoom,
+            pitch: step.pitch || 0,
+            bearing: step.bearing || 0,
+            speed: 1.5
+        });
     });
 }
 
