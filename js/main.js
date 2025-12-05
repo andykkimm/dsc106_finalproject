@@ -12,7 +12,7 @@ const STORY_STEPS = [
         title: "The Pulse of the City",
         content: "New York City has one of the largest bike-share systems in the world. " +
             "Every day, millions of trips trace the rhythms of how people move.<br><br>" +
-            "Over <strong>1,700 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations, " +
+            "Over <strong>2,000 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations, " +
             "showing how the system is heavily concentrated in the commercial core.",
         btnText: "Next: The Hidden Layer →",
         centerDesktop: [-73.9, 40.74],
@@ -43,14 +43,12 @@ const STORY_STEPS = [
     {
         step: 3,
         title: "Bridging the Gap",
-        content: "To bridge this gap, the next phase must target 'Transit Deserts'.<br><br>" +
-            "<span class='legend-item'><span class='legend-dot dot-cyan'></span> Target Neighborhoods</span><br><br>" +
-            "We’ve identified five neighborhoods like <strong>East Flatbush</strong> and <strong>Corona</strong>." +
-            "<br><br>Notice how they sit in the <strong>empty spaces between subway lines</strong>? These are dense " +
-            "communities (over <strong>68,000 households</strong> combined) with minimal train access and no bikes, the perfect gap " +
-            "for Citi Bike to fill.",
+        content: "To close this gap, the next phase must target the remaining 'Transit Deserts'.<br><br>" +
+            "<span class='legend-item'><span class='legend-dot dot-cyan'></span> Future Expansion</span><br><br>" +
+            "We’ve identified five new areas such as <strong>Flushing</strong> and <strong>Brownsville</strong>. " +
+            "These are dense communities (over 140,000 households combined) with high car-free populations and limited train access, the perfect frontier for Citi Bike's next expansion.",
 
-        btnText: "Restart Story ↺",
+        btnText: "Restart ↺",
         centerDesktop: [-73.9, 40.74],
         centerMobile: [-73.96, 40.5],
         zoomDesktop: 10.5,
@@ -72,10 +70,19 @@ const map = new mapboxgl.Map({
     interactive: true
 });
 
+const ZONE_MAPPING = {
+    "Coney Island-Sea Gate": "Coney Island & Brighton Beach",
+    "Brighton Beach": "Coney Island & Brighton Beach",
+    "East New York-City Line": "East New York & Spring Creek",
+    "Spring Creek-Starrett City": "East New York & Spring Creek",
+    "Soundview-Bruckner-Bronx River": "Soundview & Parkchester",
+    "Parkchester": "Soundview & Parkchester"
+};
+
 map.on('load', async () => {
     try {
         const [stationsData, equityData, tractsGeoJSON, subwayGeoJSON] = await Promise.all([
-            d3.csv('data/202301-citibike-50k.csv'),
+            d3.csv('data/202501-citibike-sample.csv'),
             d3.csv('data/nyc_transit_equity.csv'),
             d3.json('data/nyc_tracts.geojson'),
             d3.json('data/nyc_subway.geojson')
@@ -122,6 +129,8 @@ map.on('load', async () => {
             });
         });
 
+
+
         const neighborhoodStats = new Map();
 
         tractsGeoJSON.features.forEach(feature => {
@@ -155,6 +164,49 @@ map.on('load', async () => {
             } else {
                 feature.properties.nta_total_households = 0;
                 feature.properties.nta_avg_car_free = 0;
+            }
+        });
+
+        const zoneStats = new Map();
+
+        tractsGeoJSON.features.forEach(feature => {
+            const geoid = feature.properties.geoid || feature.properties.GEOID;
+            const data = equityLookup.get(String(geoid));
+
+            feature.properties.pct_car_free = data ? data.pct : 0;
+            feature.properties.total_households = data ? data.households : 0;
+
+            const nta = feature.properties.ntaname;
+
+            const zoneName = ZONE_MAPPING[nta] || nta;
+
+            if (zoneName) {
+                if (!zoneStats.has(zoneName)) {
+                    zoneStats.set(zoneName, { households: 0, carFreeHouseholds: 0 });
+                }
+                const stats = zoneStats.get(zoneName);
+                const households = feature.properties.total_households;
+                const carFreePct = feature.properties.pct_car_free;
+
+                stats.households += households;
+                stats.carFreeHouseholds += (households * carFreePct);
+            }
+        });
+
+        tractsGeoJSON.features.forEach(feature => {
+            const nta = feature.properties.ntaname;
+            const zoneName = ZONE_MAPPING[nta] || nta; 
+
+            const stats = zoneStats.get(zoneName);
+
+            if (stats && stats.households > 0) {
+                feature.properties.display_name = zoneName; 
+                feature.properties.display_households = stats.households;
+                feature.properties.display_avg_car_free = stats.carFreeHouseholds / stats.households;
+            } else {
+                feature.properties.display_name = nta;
+                feature.properties.display_households = 0;
+                feature.properties.display_avg_car_free = 0;
             }
         });
 
