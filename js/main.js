@@ -49,7 +49,7 @@ const STORY_STEPS = [
             "These are dense communities (over 140,000 households combined) with high car-free populations and limited train access, the perfect frontier for Citi Bike's next expansion.",
 
         btnText: "Restart ↺",
-        centerDesktop: [-73.9, 40.74],
+        centerDesktop: [-73.9, 40.68],
         centerMobile: [-73.96, 40.5],
         zoomDesktop: 10.5,
         zoomMobile: 10,
