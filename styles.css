@@ -66,15 +66,13 @@ button {
     background-color: #007bff;
     color: white;
     flex-grow: 1;
-}
-
-#next-btn:hover {
-    background-color: #0056b3;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #prev-btn {
     background-color: #e9ecef;
     color: #495057;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #prev-btn:disabled {
@@ -94,6 +92,8 @@ button {
     cursor: pointer;
     font-size: 0.9rem;
     color: #333;
+    width: fit-content;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .toggle-switch input {
@@ -184,17 +184,16 @@ input:checked+.slider:before {
     border: none;
     border-radius: 30px;
     padding: 8px 16px;
-
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     transition: all 0.2s ease;
-
     display: flex;
     align-items: center;
     gap: 8px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #recenter-btn svg {
@@ -203,11 +202,38 @@ input:checked+.slider:before {
     height: 18px;
 }
 
-#recenter-btn:hover {
-    background: #f8f9fa;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    color: #007bff;
+#next-btn:active {
+    background-color: #004494;
+    /* Even darker blue */
+    transform: translateY(0);
+    /* Reset any lift */
+}
+
+#prev-btn:active {
+    background-color: #cbd3da;
+}
+
+#recenter-btn:active {
+    background: #e2e6ea;
+    transform: translateY(0);
+}
+
+@media (hover: hover) {
+    #next-btn:hover {
+        background-color: #0056b3;
+        /* Dark Blue */
+    }
+
+    #prev-btn:hover {
+        background-color: #dbe2e8;
+        /* Darker Gray */
+    }
+
+    #recenter-btn:hover {
+        background: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
 }
 
 #project-meta {

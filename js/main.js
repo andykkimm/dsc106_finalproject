@@ -16,9 +16,9 @@ const STORY_STEPS = [
             "showing how the system is heavily concentrated in the commercial core.",
         btnText: "Next: The Hidden Layer →",
         centerDesktop: [-74, 40.74],
-        centerMobile: [-73.96, 40.63],
+        centerMobile: [-73.96, 40.65],
         zoomDesktop: 11,
-        zoomMobile: 9.8,
+        zoomMobile: 9.5,
         pitch: 0,
         bearing: 0
     },
@@ -36,7 +36,7 @@ const STORY_STEPS = [
         centerDesktop: [-74, 40.74],
         centerMobile: [-73.96, 40.47],
         zoomDesktop: 10,
-        zoomMobile: 9,
+        zoomMobile: 8.7,
         pitch: 0,
         bearing: 0
     },
@@ -50,9 +50,9 @@ const STORY_STEPS = [
 
         btnText: "Restart ↺",
         centerDesktop: [-74, 40.68],
-        centerMobile: [-73.96, 40.5],
+        centerMobile: [-73.96, 40.43],
         zoomDesktop: 10.5,
-        zoomMobile: 10,
+        zoomMobile: 9.5,
         pitch: 45,
         bearing: 0
     }
