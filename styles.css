@@ -17,7 +17,7 @@ body {
     top: 2rem;
     left: 2rem;
     width: 360px;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(5px);
     padding: 1.5rem;
     border-radius: 12px;
@@ -179,8 +179,9 @@ input:checked+.slider:before {
     right: 2rem;
     z-index: 100;
 
-    background: white;
+    background: rgba(255, 255, 255, 0.75);
     color: #333;
+    backdrop-filter: blur(5px);
     border: none;
     border-radius: 30px;
     padding: 8px 16px;
@@ -241,7 +242,7 @@ input:checked+.slider:before {
     bottom: 2rem;
     left: 2rem;
     z-index: 50;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(5px);
     padding: 1rem 1.5rem;
     border-radius: 8px;
@@ -385,6 +386,72 @@ input:checked+.slider:before {
     font-weight: 600;
 }
 
+.repo-link {
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+    transition: all 0.2s;
+}
+
+.repo-link:hover {
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+#info-btn {
+    position: absolute;
+    top: 5rem;
+    right: 2rem;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.75);
+    color: #333;
+    backdrop-filter: blur(5px);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#meta-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #999;
+    padding: 0;
+    cursor: pointer;
+    display: none;
+}
+
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -415,5 +482,35 @@ input:checked+.slider:before {
         right: 0;
         width: auto;
         border-radius: 12px 12px 0 0;
+    }
+
+    #info-btn {
+        display: flex;
+        top: 4rem;
+        right: 1rem;
+    }
+
+    #project-meta {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85%;
+        max-width: 320px;
+        bottom: auto;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        z-index: 2001;
+        border-left: none;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.8);
+    }
+
+    #project-meta.active {
+        display: block;
+    }
+
+    #meta-close-btn {
+        display: block;
     }
 }

@@ -10,7 +10,8 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚲</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚲</text></svg>">
 </head>
 
 <body>
@@ -55,6 +56,17 @@
         <span>Recenter</span>
     </button>
 
+    <div id="modal-overlay"></div>
+
+    <button id="info-btn" aria-label="Project Info">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+    </button>
+
     <div id="project-meta">
         <h1>The City Where Bike Share Isn't Shared</h1>
         <p class="authors">Justin Lee, Andrew Kim, Angela Yuan, Victor Chen</p>
@@ -62,7 +74,10 @@
             <strong>Sources:</strong><br>
             Citi Bike System Data (Jan 2025)<br>
             Car-Free Households: Census Reporter (2021 ACS)<br>
-            Subway Routes: NYU Spatial Data Repo (2019)
+            Subway Routes: NYU Spatial Data Repo (2019)<br>
+            <a href="https://github.com/musubi3/nyc-bike-share-access" target="_blank" class="repo-link">
+                View Code on GitHub →
+            </a>
         </p>
     </div>
 

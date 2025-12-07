@@ -351,3 +351,29 @@ document.getElementById('prev-btn').addEventListener('click', () => {
         updateStoryUI(currentStepIndex);
     }
 });
+
+const infoBtn = document.getElementById('info-btn');
+const metaCard = document.getElementById('project-meta');
+const closeBtn = document.getElementById('meta-close-btn');
+const overlay = document.getElementById('modal-overlay'); 
+
+if (infoBtn && metaCard && overlay) {
+    infoBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        metaCard.classList.toggle('active');
+        overlay.classList.toggle('active'); 
+    });
+}
+
+function closeModal() {
+    if (metaCard) metaCard.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+}
+
+if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+}
+
+if (overlay) {
+    overlay.addEventListener('click', closeModal);
+}
