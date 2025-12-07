@@ -205,9 +205,7 @@ input:checked+.slider:before {
 
 #next-btn:active {
     background-color: #004494;
-    /* Even darker blue */
     transform: translateY(0);
-    /* Reset any lift */
 }
 
 #prev-btn:active {
@@ -217,24 +215,6 @@ input:checked+.slider:before {
 #recenter-btn:active {
     background: #e2e6ea;
     transform: translateY(0);
-}
-
-@media (hover: hover) {
-    #next-btn:hover {
-        background-color: #0056b3;
-        /* Dark Blue */
-    }
-
-    #prev-btn:hover {
-        background-color: #dbe2e8;
-        /* Darker Gray */
-    }
-
-    #recenter-btn:hover {
-        background: #f8f9fa;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    }
 }
 
 #project-meta {
@@ -278,32 +258,6 @@ input:checked+.slider:before {
 
 #project-meta .sources strong {
     color: #333;
-}
-
-@media (max-height: 800px) {
-
-    #story-card {
-        top: 1rem;
-        padding: 1rem;
-        width: 320px;
-    }
-
-    #story-card h2 {
-        font-size: 1.3rem;
-        margin-bottom: 0.5rem;
-    }
-
-    #story-text {
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
-
-    #project-meta {
-        bottom: 1rem;
-        padding: 0.75rem 1rem;
-        transform: scale(0.85);
-        transform-origin: bottom left;
-    }
 }
 
 .legend-item {
@@ -392,11 +346,17 @@ input:checked+.slider:before {
     text-decoration: none;
     border-bottom: 1px solid #ccc;
     transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.repo-link:hover {
+.repo-link:active {
     color: #007bff;
     border-bottom-color: #007bff;
+}
+
+.repo-link:visited {
+    color: #333;
+    border-bottom-color: #ccc;
 }
 
 #info-btn {
@@ -459,6 +419,52 @@ input:checked+.slider:before {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@media (hover: hover) {
+    #next-btn:hover {
+        background-color: #0056b3;
+    }
+
+    #prev-btn:hover {
+        background-color: #dbe2e8;
+    }
+
+    #recenter-btn:hover {
+        background: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .repo-link:hover {
+        color: #007bff;
+        border-bottom-color: #007bff;
+    }
+}
+
+@media (max-height: 800px) {
+    #story-card {
+        top: 1rem;
+        padding: 1rem;
+        width: 320px;
+    }
+
+    #story-card h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    #story-text {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    #project-meta {
+        bottom: 1rem;
+        padding: 0.75rem 1rem;
+        transform: scale(0.85);
+        transform-origin: bottom left;
     }
 }
 
