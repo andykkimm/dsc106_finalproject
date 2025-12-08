@@ -10,10 +10,14 @@ const STORY_STEPS = [
     {
         step: 1,
         title: "The Pulse of the City",
-        content: "New York City has one of the largest bike-share systems in the world. " +
-            "Every day, millions of trips trace the rhythms of how people move.<br><br>" +
+        content:
+            "New York City runs on movement, and Citi Bike has become a defining rhythm of that motion. " +
+            "With over <strong>30 million rides</strong> a year, the system feels everywhere if you live near the commercial core.<br><br>" +
+
             "Over <strong>2,000 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations, " +
             "showing how the system is heavily concentrated in the commercial core.",
+
+            "But as dense and vibrant as this network appears, it hides a deeper story about <strong>who actually has access</strong> to these bikes, and who doesn’t.",
         btnText: "Next: The Hidden Layer →",
         centerDesktop: [-74, 40.74],
         centerMobile: [-73.96, 40.65],
@@ -22,16 +26,29 @@ const STORY_STEPS = [
         pitch: 0,
         bearing: 0
     },
+
     {
         step: 2,
         title: "The Hidden Layer",
-        content: "However, the system isn’t shared equally.<br><br>" +
-            "Red areas represent neighborhoods where households are predominantly <strong>Car-Free</strong>.<br>" +
+        content:
+            "But the system isn’t shared equally.<br><br>" +
+
+            "The red areas on the map show neighborhoods where households are predominantly <strong>car-free</strong> — " +
+            "places where people rely most on transit, walking, and biking. These are communities where Citi Bike should matter the most.<br><br>" +
+
             "<div class='legend-bar'></div>" +
-            "<div class='legend-labels'><span>High Car Ownership</span><span>High Car-Free %</span></div>" +
-            "While the <strong>Subway (Gray Lines)</strong> serves the core well " +
-            "notice how bike station coverage drops off sharply in the outer boroughs, " +
-            "leaving the subway to do all the heavy lifting alone.",
+            "<div class='legend-labels'><span>High Car Ownership</span><span>High Car-Free %</span></div><br>" +
+
+            "And yet here’s the <strong>surprising contradiction</strong>: areas with the <strong>highest</strong> car-free rates, sections of the Bronx, Brownsville, East New York, and Jamaica, often have <strong>no Citi Bike stations at all</strong>.<br><br>" +
+
+            "Meanwhile, neighborhoods with lower car-free rates, like Midtown, SoHo, and Williamsburg, are covered almost wall-to-wall.<br><br>" +
+
+            "The <strong>gray subway lines</strong> tell another part of the story: once you leave Manhattan, station coverage drops sharply, " +
+            "leaving the subway to do nearly all the mobility work alone.<br><br>" +
+
+            "This layering of car-free households, subway lines, and station coverage reveals a spatial mismatch between <strong>transit need</strong> and <strong>bike-share access</strong>. <br><br>" +
+
+            "<em>Turn on “Show Stations” to see exactly where the network thins out and where demand is likely highest.</em>",
         btnText: "Next: Bridging the Gap →",
         centerDesktop: [-74, 40.74],
         centerMobile: [-73.96, 40.47],
@@ -40,14 +57,27 @@ const STORY_STEPS = [
         pitch: 0,
         bearing: 0
     },
+
     {
         step: 3,
         title: "Bridging the Gap",
-        content: "To close this gap, the next phase must target the remaining 'Transit Deserts'.<br><br>" +
-            "<span class='legend-item'><span class='legend-dot dot-cyan'></span> Future Expansion</span><br><br>" +
-            "We’ve identified five new areas such as <strong>Flushing</strong> and <strong>Brownsville</strong>. " +
-            "These are dense communities (over 140,000 households combined) with high car-free populations and limited train access, the perfect frontier for Citi Bike's next expansion.",
+        content:
+            "Therefore, closing this mobility gap requires expanding Citi Bike into the remaining <strong>“Transit Deserts.”</strong><br><br>" +
 
+            "<span class='legend-item'><span class='legend-dot dot-cyan'></span> Future Expansion</span><br><br>" +
+
+            "We identified five high-need areas, including <strong>Flushing</strong> and <strong>Brownsville</strong>, where more than <strong>140,000 households</strong>, many of them car-free, have limited transit options and <strong>no Citi Bike presence</strong>.<br><br>" +
+
+            "These communities aren’t just empty spaces on a map. They represent tens of thousands of residents whose commutes, errands, and daily routines could be transformed by a reliable, affordable mobility option.<br><br>" +
+
+            "These neighborhoods are the <strong>next frontier</strong> for Citi Bike: places where expansion would not only increase ridership, but meaningfully improve <strong>mobility equity</strong>.<br><br>" +
+
+            "<strong>Takeaway:</strong> Citi Bike’s expansion shouldn’t simply follow commercial density, it should also follow <strong>transit need</strong>.<br><br>" +
+
+            "By layering car-free households, subway access, and station coverage, our visualization makes the equity gaps unmistakable. " +
+            "Only by targeting these overlooked neighborhoods can Citi Bike become a true citywide transportation system.<br><br>" +
+
+            "<em>Explore the highlighted blue areas. Each represents a community where new stations would have the biggest real-world impact.</em>",
         btnText: "Restart ↺",
         centerDesktop: [-74, 40.68],
         centerMobile: [-73.96, 40.43],
@@ -57,6 +87,7 @@ const STORY_STEPS = [
         bearing: 0
     }
 ];
+
 
 let currentStepIndex = 0;
 let isStationsVisible = true;

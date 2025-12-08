@@ -7,7 +7,7 @@
 
 ---
 
-## 📖 The Story
+##  The Story
 New York City has one of the largest bike-share systems in the world, but coverage is not evenly distributed. This project uses scrollytelling and spatial analysis to argue for the next phase of expansion.
 
 The narrative is told in three parts:
@@ -22,7 +22,7 @@ The narrative is told in three parts:
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 * **Mapbox GL JS:** For vector tile rendering, 3D extrusion, and camera control.
 * **D3.js (v7):** For data fetching (`d3.csv`, `d3.json`) and parsing.
 * **Vanilla JS (ES6+):** Custom "Controller" architecture to manage map state.
@@ -30,7 +30,7 @@ The narrative is told in three parts:
 
 ---
 
-## 📊 Data Sources
+##  Data Sources
 We utilized three primary datasets to build this analysis:
 
 | Dataset | Source | Description |
