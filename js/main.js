@@ -40,8 +40,6 @@ const STORY_STEPS = [
 
             "And yet here’s the <strong>surprising contradiction</strong>: areas with the <strong>highest</strong> car-free rates, sections of the Bronx, Brownsville, East New York, and Jamaica, often have <strong>no Citi Bike stations at all</strong>.<br><br>" +
 
-            "Meanwhile, neighborhoods with lower car-free rates, like Midtown, SoHo, and Williamsburg, are covered almost wall-to-wall.<br><br>" +
-
             "The <strong>gray subway lines</strong> tell another part of the story: once you leave Manhattan, station coverage drops sharply, " +
             "leaving the subway to do nearly all the mobility work alone.<br><br>" +
 
