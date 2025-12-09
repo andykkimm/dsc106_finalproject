@@ -30,13 +30,13 @@ const STORY_STEPS = [
         step: 2,
         title: "The Hidden Layer",
         content:
-            "But the system isn’t shared equally.<br><br>" +
+            "However, the system isn’t shared equally.<br><br>" +
 
-            "The red areas on the map show neighborhoods where households are predominantly <strong>car-free</strong> — " +
-            "places where people rely most on transit, walking, and biking. These are communities where Citi Bike should matter the most.<br><br>" +
+            "The red areas on the map show neighborhoods where households are predominantly <strong>car-free</strong>, " +
+            "places where people rely most on transit, walking, and biking.<br>" +
 
             "<div class='legend-bar'></div>" +
-            "<div class='legend-labels'><span>High Car Ownership</span><span>High Car-Free %</span></div><br>" +
+            "<div class='legend-labels'><span>High Car Ownership</span><span>High Car-Free %</span></div>" +
 
             "And yet here’s the <strong>surprising contradiction</strong>: areas with the <strong>highest</strong> car-free rates, sections of the Bronx, Brownsville, East New York, and Jamaica, often have <strong>no Citi Bike stations at all</strong>.<br><br>" +
 
