@@ -5,7 +5,6 @@ import { addSubwayLayer } from './layer-subway.js';
 import { addBuildingLayer } from './layer-buildings.js';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYW55dWFuIiwiYSI6ImNtaTBzd3o5ZTEya2Uycm9xMDZtNTdzZjcifQ.2KddgkMMu4gC-gn_ioRr7w';
-
 const STORY_STEPS = [
     {
         step: 1,
@@ -15,7 +14,7 @@ const STORY_STEPS = [
             "With over <strong>30 million rides</strong> a year, the system feels everywhere if you live near the commercial core.<br><br>" +
 
             "Over <strong>2,000 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations, " +
-            "showing how the system is heavily concentrated in the commercial core.",
+            "showing how the system is heavily concentrated in the commercial core.<br><br>" +
 
             "But as dense and vibrant as this network appears, it hides a deeper story about <strong>who actually has access</strong> to these bikes, and who doesn’t.",
         btnText: "Next: The Hidden Layer →",
