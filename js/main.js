@@ -14,6 +14,12 @@ const STORY_STEPS = [
             "With over <strong>30 million rides</strong> a year, the system feels everywhere if you live near the commercial core.<br><br>" +
 
             "Over <strong>2,000 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations, " +
+            "showing how the system is heavily concentrated in the commercial core.",
+        fullContent:
+            "New York City runs on movement, and Citi Bike has become a defining rhythm of that motion. " +
+            "With over <strong>30 million rides</strong> a year, the system feels everywhere if you live near the commercial core.<br><br>" +
+
+            "Over <strong>2,000 stations</strong> light up the grid. <strong>Larger circles</strong> represent busier stations, " +
             "showing how the system is heavily concentrated in the commercial core.<br><br>" +
 
             "But as dense and vibrant as this network appears, it hides a deeper story about <strong>who actually has access</strong> to these bikes, and who doesn’t.",
@@ -29,23 +35,25 @@ const STORY_STEPS = [
     {
         step: 2,
         title: "The Hidden Layer",
-        content:
+        content: "However, the system isn’t shared equally.<br><br>" +
+            "Red areas represent neighborhoods where households are predominantly <strong>Car-Free</strong>.<br>" +
+            "<div class='legend-bar'></div>" +
+            "<div class='legend-labels'><span>High Car Ownership</span><span>High Car-Free %</span></div>" +
+            "While the <strong>Subway (Gray Lines)</strong> serves the core well " +
+            "notice how bike station coverage drops off sharply in the outer boroughs, " +
+            "leaving the subway to do all the heavy lifting alone.",
+        fullContent:
             "However, the system isn’t shared equally.<br><br>" +
 
             "The red areas on the map show neighborhoods where households are predominantly <strong>car-free</strong>, " +
-            "places where people rely most on transit, walking, and biking.<br>" +
-
-            "<div class='legend-bar'></div>" +
-            "<div class='legend-labels'><span>High Car Ownership</span><span>High Car-Free %</span></div>" +
+            "places where people rely most on transit, walking, and biking.<br><br>" +
 
             "And yet here’s the <strong>surprising contradiction</strong>: areas with the <strong>highest</strong> car-free rates, sections of the Bronx, Brownsville, East New York, and Jamaica, often have <strong>no Citi Bike stations at all</strong>.<br><br>" +
 
             "The <strong>gray subway lines</strong> tell another part of the story: once you leave Manhattan, station coverage drops sharply, " +
             "leaving the subway to do nearly all the mobility work alone.<br><br>" +
 
-            "This layering of car-free households, subway lines, and station coverage reveals a spatial mismatch between <strong>transit need</strong> and <strong>bike-share access</strong>. <br><br>" +
-
-            "<em>Turn on “Show Stations” to see exactly where the network thins out and where demand is likely highest.</em>",
+            "This layering of car-free households, subway lines, and station coverage reveals a spatial mismatch between <strong>transit need</strong> and <strong>bike-share access</strong>.",
         btnText: "Next: Bridging the Gap →",
         centerDesktop: [-74, 40.74],
         centerMobile: [-73.96, 40.47],
@@ -59,9 +67,12 @@ const STORY_STEPS = [
         step: 3,
         title: "Bridging the Gap",
         content:
-            "Therefore, closing this mobility gap requires expanding Citi Bike into the remaining <strong>“Transit Deserts.”</strong><br><br>" +
-
+            "To close this gap, the next phase must target the remaining <strong>'Transit Deserts'.</strong><br><br>" +
             "<span class='legend-item'><span class='legend-dot dot-cyan'></span> Future Expansion</span><br><br>" +
+            "We identified five high-need areas, including <strong>Flushing</strong> and <strong>Brownsville</strong>, where more than <strong>140,000 households</strong>, " +
+            "many of them car-free, have limited transit options and <strong>no Citi Bike presence</strong>.",
+        fullContent:
+            "To close this gap, the next phase must target the remaining <strong>'Transit Deserts'.</strong><br><br>" +
 
             "We identified five high-need areas, including <strong>Flushing</strong> and <strong>Brownsville</strong>, where more than <strong>140,000 households</strong>, many of them car-free, have limited transit options and <strong>no Citi Bike presence</strong>.<br><br>" +
 
@@ -72,9 +83,7 @@ const STORY_STEPS = [
             "<strong>Takeaway:</strong> Citi Bike’s expansion shouldn’t simply follow commercial density, it should also follow <strong>transit need</strong>.<br><br>" +
 
             "By layering car-free households, subway access, and station coverage, our visualization makes the equity gaps unmistakable. " +
-            "Only by targeting these overlooked neighborhoods can Citi Bike become a true citywide transportation system.<br><br>" +
-
-            "<em>Explore the highlighted blue areas. Each represents a community where new stations would have the biggest real-world impact.</em>",
+            "Only by targeting these overlooked neighborhoods can Citi Bike become a true citywide transportation system.",
         btnText: "Restart ↺",
         centerDesktop: [-74, 40.68],
         centerMobile: [-73.96, 40.43],
@@ -223,12 +232,12 @@ map.on('load', async () => {
 
         tractsGeoJSON.features.forEach(feature => {
             const nta = feature.properties.ntaname;
-            const zoneName = ZONE_MAPPING[nta] || nta; 
+            const zoneName = ZONE_MAPPING[nta] || nta;
 
             const stats = zoneStats.get(zoneName);
 
             if (stats && stats.households > 0) {
-                feature.properties.display_name = zoneName; 
+                feature.properties.display_name = zoneName;
                 feature.properties.display_households = stats.households;
                 feature.properties.display_avg_car_free = stats.carFreeHouseholds / stats.households;
             } else {
@@ -259,12 +268,21 @@ map.on('load', async () => {
     }
 });
 
+// --- 5. MODAL & UI LOGIC ---
+
+// Get Elements
+const readMoreBtn = document.getElementById('read-more-btn');
+const textModal = document.getElementById('text-modal');
+const closeModalBtn = document.getElementById('close-text-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalBody = document.getElementById('modal-body');
+
 function updateStoryUI(index) {
     const step = STORY_STEPS[index];
-
+    
     document.getElementById('step-count').innerText = `Part ${index + 1} of ${STORY_STEPS.length}`;
     document.getElementById('story-title').innerText = step.title;
-    document.getElementById('story-text').innerHTML = step.content;
+    document.getElementById('story-text').innerHTML = step.content; 
     document.getElementById('next-btn').innerText = step.btnText;
     document.getElementById('prev-btn').disabled = (index === 0);
 
@@ -277,20 +295,61 @@ function updateStoryUI(index) {
             if (step.step === 1) {
                 isStationsVisible = true;
                 const toggleInput = document.getElementById('station-toggle');
-                if (toggleInput) toggleInput.checked = true;
+                if(toggleInput) toggleInput.checked = true;
             }
         }
     }
 
-    updateMapLayers();
-    map.flyTo({
-        center: getResponsiveCenter(step),
-        zoom: getResponsiveZoom(step),
+    if (step.fullContent) {
+        readMoreBtn.style.display = 'inline-block';
+        
+        readMoreBtn.onclick = () => {
+            modalTitle.innerText = step.title;
+            modalBody.innerHTML = step.fullContent;
+            textModal.classList.add('active');
+        };
+    } else {
+        readMoreBtn.style.display = 'none';
+    }
+
+    updateMapLayers(); 
+    map.flyTo({ 
+        center: getResponsiveCenter(step), 
+        zoom: getResponsiveZoom(step), 
         speed: 1.5,
-        pitch: step.pitch || 0,
-        bearing: step.bearing || 0
+        pitch: step.pitch,
+        bearing: step.bearing
     });
 }
+
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+        textModal.classList.remove('active');
+    });
+}
+
+window.addEventListener('click', (e) => {
+    if (e.target === textModal) {
+        textModal.classList.remove('active');
+    }
+});
+
+document.getElementById('next-btn').addEventListener('click', () => {    
+    if (currentStepIndex < STORY_STEPS.length - 1) {
+        currentStepIndex++;
+        updateStoryUI(currentStepIndex);
+    } else {
+        currentStepIndex = 0; 
+        updateStoryUI(currentStepIndex);
+    }
+});
+
+document.getElementById('prev-btn').addEventListener('click', () => {
+    if (currentStepIndex > 0) {
+        currentStepIndex--;
+        updateStoryUI(currentStepIndex);
+    }
+});
 
 function updateMapLayers() {
     const stepNum = STORY_STEPS[currentStepIndex].step;
@@ -363,33 +422,16 @@ if (toggleInput) {
     });
 }
 
-document.getElementById('next-btn').addEventListener('click', () => {
-    if (currentStepIndex < STORY_STEPS.length - 1) {
-        currentStepIndex++;
-        updateStoryUI(currentStepIndex);
-    } else {
-        currentStepIndex = 0;
-        updateStoryUI(currentStepIndex);
-    }
-});
-
-document.getElementById('prev-btn').addEventListener('click', () => {
-    if (currentStepIndex > 0) {
-        currentStepIndex--;
-        updateStoryUI(currentStepIndex);
-    }
-});
-
 const infoBtn = document.getElementById('info-btn');
 const metaCard = document.getElementById('project-meta');
 const closeBtn = document.getElementById('meta-close-btn');
-const overlay = document.getElementById('modal-overlay'); 
+const overlay = document.getElementById('modal-overlay');
 
 if (infoBtn && metaCard && overlay) {
     infoBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         metaCard.classList.toggle('active');
-        overlay.classList.toggle('active'); 
+        overlay.classList.toggle('active');
     });
 }
 
