@@ -3,7 +3,7 @@
 
 **An interactive data story revealing NYC's "transit deserts" by visualizing dense, car-free neighborhoods served by neither the subway nor the Citi Bike network.**
 
-🔗 **[View Live Demo](https://musubi3.github.io/nyc-bike-share-access)**
+🔗 **[View Live Demo](https://andykkimm.github.io/dsc106_finalproject)**
 
 ---
 
