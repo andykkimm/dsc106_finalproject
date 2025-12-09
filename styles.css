@@ -614,3 +614,13 @@ input:checked+.slider:before {
         max-width: 300px;
     }
 }
+
+.video-link a {
+    color: #000 !important;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.video-link a:visited {
+    color: #000 !important;
+}
