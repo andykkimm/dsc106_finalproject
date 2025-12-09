@@ -24,6 +24,9 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     z-index: 100;
     transition: transform 0.3s ease;
+    max-height: calc(100vh - 4rem);  
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;  
 }
 
 #story-card h2 {
